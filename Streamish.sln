@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamish", "Streamish\Streamish.csproj", "{6E29EE19-E2DF-483B-A8C5-6DE4888FAA49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamish", "Streamish\Streamish.csproj", "{6E29EE19-E2DF-483B-A8C5-6DE4888FAA49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamish.Tests", "Streamish.Tests\Streamish.Tests.csproj", "{F7A9D33E-BB3E-4A4F-956E-C4B6E35E226D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6E29EE19-E2DF-483B-A8C5-6DE4888FAA49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E29EE19-E2DF-483B-A8C5-6DE4888FAA49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E29EE19-E2DF-483B-A8C5-6DE4888FAA49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7A9D33E-BB3E-4A4F-956E-C4B6E35E226D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7A9D33E-BB3E-4A4F-956E-C4B6E35E226D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7A9D33E-BB3E-4A4F-956E-C4B6E35E226D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7A9D33E-BB3E-4A4F-956E-C4B6E35E226D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

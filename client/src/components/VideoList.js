@@ -18,9 +18,6 @@ const VideoList = () => {
     return (
         <>
             <div>
-                <VideoForm getVideos={getVideos}/>
-            </div>
-            <div>
                 <VideoSearch setVideos={setVideos}/>
             </div>
             <div>

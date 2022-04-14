@@ -1,11 +1,16 @@
 import React from "react";
 import "./App.css";
-import VideoList from "./components/VideoList";
+import { BrowserRouter as Router } from "react-router-dom";
+import ApplicationViews from "./components/ApplicationViews.js";
+import Header from "./components/Header.js";
 
 function App() {
   return (
     <div className="App">
-      <VideoList />
+      <Router>
+        <Header />
+        <ApplicationViews />
+      </Router>
     </div>
   );
 }

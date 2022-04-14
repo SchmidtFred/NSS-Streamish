@@ -138,6 +138,10 @@ namespace Streamish.Repositories
                                     Url = DbUtils.GetString(reader, "Url"),
                                     UserProfileId = DbUtils.GetInt(reader, "UserId"),
                                     Comments = new List<Comment>(),
+                                    UserProfile = new UserProfile()
+                                    {
+                                        Name = DbUtils.GetString(reader, "UserName"),
+                                    },
                                 };
 
                                 //add this new video to the list in our profile

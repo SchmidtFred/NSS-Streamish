@@ -78,6 +78,42 @@ namespace Streamish.Repositories
             }
         }
 
+        public UserProfile GetByFirebaseUserId(string firebaseUserid)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, Name, Email, FirebaseUserId, ImageUrl, DateCreated
+                              FROM UserProfile
+                             WHERE FirebaseUserId = @firebaseUserId";
+
+                    DbUtils.AddParameter(cmd, "@firebaseUserId", firebaseUserid);
+
+                    UserProfile profile = null;
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        profile = new UserProfile()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
+                        };
+                    }
+                    reader.Close();
+
+                    return profile;
+                }
+            }
+        }
+
         public UserProfile GetByIdWithVideos(int id)
         {
             using (var conn = Connection)
@@ -184,10 +220,11 @@ namespace Streamish.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                            INSERT INTO UserProfile (Name, Email, ImageUrl, DateCreated)
+                            INSERT INTO UserProfile (FirebaseUserId, Name, Email, ImageUrl, DateCreated)
                             OUTPUT INSERTED.ID
-                            VALUES (@Name, @Email, @ImageUrl, @DateCreated)";
+                            VALUES (@FirebaseUserId, @Name, @Email, @ImageUrl, @DateCreated)";
 
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", profile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@Name", profile.Name);
                     DbUtils.AddParameter(cmd, "@Email", profile.Email);
                     DbUtils.AddParameter(cmd, "@ImageUrl", profile.ImageUrl);

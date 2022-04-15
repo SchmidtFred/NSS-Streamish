@@ -21,7 +21,7 @@ const VideoList = () => {
                 <VideoSearch setVideos={setVideos}/>
             </div>
             <div>
-                {videos.map(video =>
+                {videos?.map(video =>
                     <Video video={video} key={video.id} />
                     )}
             </div>

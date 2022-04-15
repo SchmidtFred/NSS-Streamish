@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Streamish
 {
@@ -27,7 +28,22 @@ namespace Streamish
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
+            var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
+            services
+                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                 .AddJwtBearer(options =>
+                 {
+                     options.Authority = googleTokenUrl;
+                     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                     {
+                         ValidateIssuer = true,
+                         ValidIssuer = googleTokenUrl,
+                         ValidateAudience = true,
+                         ValidAudience = firebaseProjectId,
+                         ValidateLifetime = true
+                     };
+                 });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -50,7 +66,7 @@ namespace Streamish
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
